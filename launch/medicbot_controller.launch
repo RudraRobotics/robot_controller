@@ -1,0 +1,15 @@
+<?xml version="3.0"?>
+<launch>
+  <arg name="slam" default="false"/>
+  <arg name="open_rviz" default="true"/>
+  <group if="$(arg slam)">
+    <node pkg="joy" type="joy_node" name="joy_node">
+        <param name="autorepeat_rate" type="double" value="50.0" />
+    </node>
+        <node pkg="medicbot_controller" type="medicbot_teleop_joy" name="medicbot_teleop_joy"/>
+  </group>
+  <group if="$(arg open_rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find medicbot_controller)/rviz/medicbot.rviz"/>
+  </group>
+</launch>
+
